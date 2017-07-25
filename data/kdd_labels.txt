@@ -1,0 +1,5 @@
+normal
+dos
+probe
+u2r
+r2l

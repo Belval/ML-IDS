@@ -20,7 +20,66 @@ There are a few freely available datasets that applies to the field, I could att
 
 - [UNB ICX IDS 2012](http://www.unb.ca/cic/research/datasets/ids.html) (Request sent)
 
-For the first part of the prototyping process, the KDD Cup dataset will be used as it was preprocessed already.
+For the first part of the prototyping process, the KDD Cup dataset will be used as it was preprocessed already. It uses the following inputs and the goal is to categorize the example in one of the five categories.
+
+### Inputs
+
+For now the project will be based on KDD's data which includes 41 values, 3 of which are discrete and will have to binarized
+
+| Variable name               | Discrete or Continuous | Possible values  |
+| --------------------------- |:----------------------:| ----------------:|
+| Duration                    | Continuous             | -                |
+| Protocol Type               | Discrete               | {tcp, udp}       |
+| Service                     | Discrete               | {http, ftp}      |
+| Flag                        | Discrete               | {SF}             |
+| Source bytes                | Continuous             | -                |
+| Destination bytes           | Continuous             | -                |
+| Land                        | Discrete               | Ukwn |
+| Wrong fragment              | Continuous             | - |
+| Urgent                      | Continuous             | - |
+| Hot                         | Continuous             | - |
+| Num failed                  | Continuous             | - |
+| Logged in                   | Discrete               | {0, 1} |
+| Num compromised             | Continuous             | - |
+| Root shell                  | Continuous             | - |
+| Su attempted                | Continuous             | - |
+| Num root                    | Continuous             | - |
+| Num file creations          | Continuous             | - |
+| Num shells                  | Continuous             | - |
+| Num access files            | Continuous             | - |
+| Num outbound cmds           | Continuous             | - |
+| Is host login               | Discrete               | {0, 1} |
+| Is guest login              | Discrete               | {0, 1} |
+| Count                       | Countinuous            | - |
+| Srv count                   | Countinuous            | - |
+| Serror rate                 | Countinuous            | - |
+| Srv serror rate             | Countinuous            | - |
+| Rerror rate                 | Countinuous            | - |
+| Srv rerror rate             | Countinuous            | - |
+| Same srv rate               | Countinuous            | - |
+| Diff srv rate               | Countinuous            | - |
+| Srv diff host rate          | Countinuous            | - |
+| Dst host count              | Countinuous            | - |
+| Dst host srv count          | Countinuous            | - |
+| Dst host same srv rate      | Countinuous            | - |
+| Dst host diff srv rate      | Countinuous            | - |
+| Dst host same src port rate | Countinuous            | - |
+| Dst host serror rate        | Countinuous            | - |
+| Dst host srv serror rate    | Countinuous            | - |
+| Dst host rerror rate        | Countinuous            | - |
+| Dst host srv rerror rate    | Countinuous            | - |
+
+### Outputs
+
+There are multiple possible outputs that can be grouped in
+
+| Label       | Description                         |
+| ----------- |:-----------------------------------:|
+| normal      | Normal                              |
+| dos         | Denial of Service Attack            |
+| probe       | Probe                               |
+| u2r         | User to root (Privilege escalation) |
+| r2l         | Remote to user                      |
 
 ## Model developpement
 
