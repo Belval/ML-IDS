@@ -148,10 +148,26 @@ I will use my personnal computer for the training, if someone wishes to replicat
 These are merely supposition on what minimal hardware would be required based on the platform. In the case at hand I will use an x86-64 processor because the cost for a dual gigabit port is lower and the hardware will be supported out of the box (I'd rather avoid troubleshooting hardware issues).
 
 - x86-64
-    - 2 cores celeron processor (would scale if more processing power was available)
+
+    [PCPartPicker part list](https://pcpartpicker.com/list/mQL6tJ) / [Price breakdown by merchant](https://pcpartpicker.com/list/mQL6tJ/by_merchant/)
+
+    Type|Item|Price
+    :----|:----|:----
+    **CPU** | [Intel - Celeron G3930 2.9GHz Dual-Core Processor](https://pcpartpicker.com/product/WqVBD3/intel-celeron-g3930-29ghz-dual-core-processor-bx80677g3930) | $38.69 @ OutletPC 
+    **Motherboard** | [Gigabyte - GA-H110M-A Micro ATX LGA1151 Motherboard](https://pcpartpicker.com/product/hMvZxr/gigabyte-motherboard-gah110ma) | $51.49 @ SuperBiiz 
+    **Memory** | [Patriot - Signature Line 4GB (1 x 4GB) DDR4-2400 Memory](https://pcpartpicker.com/product/GXbkcf/patriot-memory-psd44g240081) | $32.99 @ Amazon 
+    **Storage** | [Seagate - Barracuda 250GB 3.5" 7200RPM Internal Hard Drive](https://pcpartpicker.com/product/vKtCmG/seagate-internal-hard-drive-st3250312as) | $16.34 @ Other World Computing 
+    **Case** | [Rosewill - SRM-01 MicroATX Mini Tower Case](https://pcpartpicker.com/product/wMZ2FT/rosewill-case-srm01) | $29.99 @ Amazon 
+    **Power Supply** | [EVGA - 400W ATX Power Supply](https://pcpartpicker.com/product/86M323/evga-power-supply-100n10400l1) | $29.99 @ Amazon 
+    **Wired Network Adapter** | [TP-Link - TG-3468 PCI-Express x1 10/100/1000 Mbps Network Adapter](https://pcpartpicker.com/product/dQmLrH/tp-link-wired-network-card-tg3468) | $12.14 @ OutletPC 
+    | *Prices include shipping, taxes, rebates, and discounts* |
+    | **Total** | **$211.63**
+
+    **It is worth noting that a used server can probably do the job and cost less. Also I'd like to point out that this is a dirty cheap version, the parts can easily be changed to get a stronger machine, Celeron -> i3 or HDD -> SDD**
+
 - ARM
     - 4 cores ARMv8 or more recent
-- 2-4 GB RAM
+    - Something like a [Banana Pi R2](http://www.banana-pi.org/r2.html) hardware wise.
 
 For portability and performance, the inference will be done in C++.
 
