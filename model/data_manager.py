@@ -6,6 +6,7 @@ class DataManager(object):
     def __init__(self, path, ratio, batch_size):
         self.path = path
         self.ratio = ratio
+        self.__ground_truth_len = 5
         self.__current_batch_point = 0
         self.__batch_size = batch_size
         self.__PROTOCOLS = ["tcp", "udp", "icmp"]
@@ -73,7 +74,9 @@ class DataManager(object):
         return self.__data[0:self.get_train_data_count()]
 
     def get_next_train_batch(self):
-        return self.get_train_data[self.__current_batch_point * self.__batch_size:(self.__current_batch_point + 1) * self.__batch_size]
+        train_data = self.get_train_data[self.__current_batch_point * self.__batch_size:(self.__current_batch_point + 1) * self.__batch_size]
+        self.__current_batch_point += 1
+        return train_data
 
     def get_train_data_count(self):
         return int(self.__example_count * self.ratio)
@@ -83,3 +86,6 @@ class DataManager(object):
 
     def get_test_data_count(self):
         return int(self.__example_count - self.get_train_data_count())
+
+    def get_ground_truth_len(self):
+        return self.__ground_truth_len

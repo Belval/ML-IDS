@@ -2,12 +2,9 @@ import numpy as np
 import tensorflow as tf
 
 
-class LogisticRegression(object):
-    def __init__(learning_rate, epoch_count, batch_size, data_manager):
-        self.__learning_rate = learning_rate
-        self.__epoch = epoch_count
-        self.__batch_size = batch_size
-        self.__data_manager = data_manager
+class LogisticRegression(BaseModel):
+    def __init__(learning_rate, epoch_count, batch_size, data_manager, load_path=None):
+        BaseModel.__init__(learning_rate, epoch_count, batch_size, data_manager, load_path)
 
     def train(self):
         x = tf.placeholder(tf.float32, [None, self.__feature_count])
@@ -24,7 +21,7 @@ class LogisticRegression(object):
 
         init = tf.global_variables_initializer()
 
-        with tf.Session() as sess:
+        with tf.Session(graph=self.__graph) as sess:
             sess.run(init)
 
             for epoch in range(training_epochs):
@@ -36,14 +33,5 @@ class LogisticRegression(object):
                     avg_cost += c / total_batch
 
                 print("[+] Epoch: {}, cost: {}".format(epoch, format(avg_cost)))
-
-    def test(self):
-        raise NotImplemented()
-
-    def save(self, path):
-        raise NotImplemented()
-
-    def load(self, path):
-        raise NotImplemented()
 
 
