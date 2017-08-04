@@ -10,7 +10,6 @@ from data_manager import DataManager
 
 # Models
 from logistic_regression import LogisticRegression
-from support_vector_machine import SVM
 from feed_forward_neural_network import FeedForwardNN
 from lstm_network import LSTMNN
 
@@ -18,7 +17,7 @@ def parse_arguments():
     """
         Parse the command line arguments of the program.
     """
-    
+
     parser = argparse.ArgumentParser(description='Train a model on data.')
     parser.add_argument(
         "data_dir",
@@ -34,10 +33,18 @@ def parse_arguments():
         default="out/",
     )
     parser.add_argument(
+        "-b",
+        "--batch_size",
+        type=int,
+        nargs="?",
+        help="The number of examples in a batch",
+        default=128
+    )
+    parser.add_argument(
         "-c",
         "--epoch_count",
         type=int,
-        nargs="?",        
+        nargs="?",
         help="Number of training steps.",
         default=100
     )
@@ -45,7 +52,7 @@ def parse_arguments():
         "-l",
         "--learning_rate",
         type=float,
-        nargs="?",        
+        nargs="?",
         help="The initial learning rate.",
         default=0.01
     )
@@ -53,7 +60,7 @@ def parse_arguments():
         "-r",
         "--train_test_ratio",
         type=float,
-        nargs="?",        
+        nargs="?",
         help="The ratio between train and test examples in the data.",
         default=0.85
     )
@@ -62,7 +69,7 @@ def parse_arguments():
         "--model",
         type=int,
         nargs="?",
-        help="The model to use:\n \tLogReg (1)\n \tSVM (2)\n \tFeedForwardNN (3)\n \tLSTMNN (4)"
+        help="The model to use:\n \tLogReg (1)\n \tFeedForwardNN (2)\n \tLSTMNN (3)"
     )
 
     return parser.parse_args()
@@ -81,22 +88,49 @@ def main():
         os.makedirs(args.output_dir)
     except OSError as e:
         if e.errno != errno.EEXIST:
-            raise
+            raise e
 
-    data_manager = DataManager(args.data_dir, args.train_test_ratio)
+    data_manager = DataManager(args.data_dir, args.train_test_ratio, args.batch_size)
 
     model = None
 
-    îf args.model == 1:
-        model = LogisticRegression()
+    if args.model == 1:
+        model = LogisticRegression(
+            args.learning_rate,
+            args.epoch_count,
+            data_manager,
+            args.output_dir
+        )
     elif args.model == 2:
-        model = SVM()
+        model = FeedForwardNN(
+            args.learning_rate,
+            args.epoch_count,
+            data_manager,
+            args.output_dir
+        )
     elif args.model == 3:
-        model = FeedForwardNN()
-    elif args.model == 4:
-        model = LSTMNN()
+        model = LSTMNN(
+            args.learning_rate,
+            args.epoch_count,
+            data_manager,
+            args.output_dir
+        )
     else:
         raise Exception("Unknown model")
 
-if __name__=='__main__':
+    try:
+        model.load(
+            os.path.join(
+                args.output_dir,
+                'graph.pb'
+            )
+        )
+    except:
+        model.train()
+
+    model.test()
+
+    model.save(args.output_dir)
+
+if __name__ == '__main__':
     main()

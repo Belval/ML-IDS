@@ -1,19 +1,15 @@
-import numpy as np
 import tensorflow as tf
 
+from base_model import BaseModel
 
 class LSTMNN(object):
-    def __init__(learning_rate, epoch_count, batch_size, data_manager, load_path=None):
-        BaseModel.__init__(learning_rate, epoch_count, batch_size, data_manager, load_path)
-    
+    """
+        LSTM neural network class, inherits from BaseModel
+    """
+
     def train(self):
-        raise NotImplemented()
+        """
+            Fit the LSTM neural network to the data
+        """
 
-    def test(self):
-        raise NotImplemented()
-
-    def save(self, path):
-        raise NotImplemented()
-
-    def load(self, path):
-        raise NotImplemented()
+        raise NotImplementedError()

@@ -7,6 +7,14 @@ This is a three phases project that can roughly described as
 - Model developpement
 - Hardware implementation
 
+## Project structure
+
+This project has four folders
+- data -> Dataset(s) related to the project 
+- model -> Three machine learning model that I used to get my result (structure only) + a DataManager class to turn the dataset into learnable features (KDD Cup dataset only)
+- implementation -> Empty for now, will contain the actual C++ implementation that could be deployed on the proposed x86-64 or ARM machines.
+- papers -> 
+
 ## Data gathering
 
 There are a few freely available datasets that applies to the field, I could attempt to create my own set by setting up a virtual machine exposed to the Internet but it is unlikely that I will record any privilege escalation attack (or any sophisticated attacks really) only DoS, DDoS, SSH bruteforce and scans could really be recorded.
@@ -18,22 +26,9 @@ There are a few freely available datasets that applies to the field, I could att
 
 ### Not freely available datasets
 
-- [UNB ICX IDS 2012](http://www.unb.ca/cic/research/datasets/ids.html) (Request sent)
+- [UNB ICX IDS 2012](http://www.unb.ca/cic/research/datasets/ids.html) (Received authorization to use the dataset on August 1st therefore it will be used in a future version of the project). As I do not own the rights to it I cannot distribute it.
 
 For the first part of the prototyping process, the KDD Cup dataset will be used as it was preprocessed already. It uses the following inputs and the goal is to categorize the example in one of the five categories.
-
-### Considerations over the KDD Cup 99 dataset
-
-While one of the few datasets freely available on the subject, the KDD Cup 99 dataset has many shortcomings that can be summarized to:
-
-- Categories are unbalanced, 70% of the testing set is DoS
-- Detecting DoS is overall pointless as it generates a log of traffic
-- Redundant records
-
-All those points and many more are described in *[A detailed analysis of the KDD Cup 99 Data Set](http://www.ee.ryerson.ca/~bagheri/papers/cisda.pdf)* by Mahbod Tavallaee, Ebrahim Bagheri, Wei Lu, and Ali A. Ghorbani. They proposed a solution which will be partially used namely:
-
-- Removing redundant records
-- Artificially increase the number of R2L and U2R examples
 
 ### Inputs
 
@@ -41,7 +36,7 @@ For now the project will be based on KDD's data which includes 40 values, 32 con
 
 When symbolic variables are binarized, the resulting vector contains 3 (protocol) + 70 (service) + 11 (flag) + 37 (continuous or already binarized) = 121 values
 
-While all of those values will be used in the first version to allow comparison with current research, some might be added afterwards for sake of completeness and relevancy in 2017.
+While all of those values will be used in the first version to allow comparison with current research, some might be added afterward for sake of completeness and relevancy in 2017.
 
 | Variable name               | Discrete or Continuous | Possible values  |
 | --------------------------- |:----------------------:| ----------------:|
@@ -98,9 +93,22 @@ There are multiple possible outputs that can be grouped in
 | u2r         | User to root (Privilege escalation) | { buffer_overflow, loadmodule, perl, rootkit } |
 | r2l         | Remote to user                      | { ftp_write, guess_passwd, imap, multihop, phf, spy, warezclient, warezmaster } |
 
+### Considerations over the KDD Cup 99 dataset
+
+While one of the few datasets freely available on the subject, the KDD Cup 99 dataset has many shortcomings that can be summarized to:
+
+- Categories are unbalanced, 70% of the testing set is DoS
+- Detecting DoS is overall pointless as it generates a log of traffic
+- Redundant records
+
+All those points and many more are described in *[A detailed analysis of the KDD Cup 99 Data Set](http://www.ee.ryerson.ca/~bagheri/papers/cisda.pdf)* by Mahbod Tavallaee, Ebrahim Bagheri, Wei Lu, and Ali A. Ghorbani. They proposed a solution which will be partially used namely:
+
+- Removing redundant records
+- Artificially increase the number of R2L and U2R examples
+
 ## Model developpement
 
-While researchers already explored most machine model, they forgot one aspect that is crucial to the project at hand: resources. The whole point being to end up with a usable hardware implementation, it is impossible to afford more than a few milliseconds for each packets on a rather weak machine. I will refrain from going straight to the LSTM and take the time to benchmark the performance of other well-known algorithms. I will explore three models to identify the one that shows the best performance to resources among logistic regression, support-vector machines, deep feedforward neural networks, and LSTM recurrent networks.
+While researchers already explored most machine model, they forgot one aspect that is crucial to the project at hand: resources. The whole point being to end up with a usable hardware implementation, it is impossible to afford more than a few milliseconds for each packets on a rather weak machine. I will refrain from going straight to the LSTM and take the time to benchmark the performance of other well-known algorithms. I will explore three models to identify the one that shows the best performance to resources among logistic regression, deep feedforward neural networks, and LSTM recurrent networks.
 
 To avoid reinventing the basics, I will use the TensorFlow framework that supports both x86-64 and ARM.
 
@@ -111,14 +119,6 @@ To avoid reinventing the basics, I will use the TensorFlow framework that suppor
     - Simple to understand because it is not a blackbox
 - Cons
     - Probably too simple to correctly fit the problem
-    - No conception of time
-
-### Support Vector Machines
-- Pros
-    - Usable for semi-supervised learning if using TSVM (unlabelled data)
-    - It finds the global minimum
-- Cons
-    - A normal SVM will not return a prediction confidence and it's a big handicap in later implementation.
     - No conception of time
 
 ### Standard FeedForward Neural Network
