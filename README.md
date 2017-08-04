@@ -1,3 +1,5 @@
+**Project is not ready, avoid opening issues**
+
 # ML-IDS
 Applying machine learning principles to the information security field through intelligent intrusion detection systems.
 
@@ -10,10 +12,10 @@ This is a three phases project that can roughly described as
 ## Project structure
 
 This project has four folders
-- data -> Dataset(s) related to the project 
+- data -> Dataset(s) related to the project
 - model -> Three machine learning model that I used to get my result (structure only) + a DataManager class to turn the dataset into learnable features (KDD Cup dataset only)
 - implementation -> Empty for now, will contain the actual C++ implementation that could be deployed on the proposed x86-64 or ARM machines.
-- papers -> 
+- papers ->
 
 ## Data gathering
 
@@ -43,7 +45,7 @@ While all of those values will be used in the first version to allow comparison 
 | Duration                    | Continuous             | [0, ∞[           |
 | Protocol Type               | Discrete (Symbolic)    | {icmp, tcp, udp} |
 | Service                     | Discrete (Symbolic)    | {IRC, X11, Z39_50, aol, ..., hostnames, http, ftp}      |
-| Flag                        | Discrete (Symbolic)    | {OTH, REJ, RSTO, RSTOS0, RSTR, S0, S1, S2, S3, SF, SH}  |  
+| Flag                        | Discrete (Symbolic)    | {OTH, REJ, RSTO, RSTOS0, RSTR, S0, S1, S2, S3, SF, SH}  |
 | Source bytes                | Continuous             | [0, ∞[           |
 | Destination bytes           | Continuous             | [0, ∞[           |
 | Land                        | Discrete               | {0, 1} |
@@ -153,13 +155,13 @@ These are merely supposition on what minimal hardware would be required based on
 
     Type|Item|Price
     :----|:----|:----
-    **CPU** | [Intel - Celeron G3930 2.9GHz Dual-Core Processor](https://pcpartpicker.com/product/WqVBD3/intel-celeron-g3930-29ghz-dual-core-processor-bx80677g3930) | $38.69 @ OutletPC 
-    **Motherboard** | [Gigabyte - GA-H110M-A Micro ATX LGA1151 Motherboard](https://pcpartpicker.com/product/hMvZxr/gigabyte-motherboard-gah110ma) | $51.49 @ SuperBiiz 
-    **Memory** | [Patriot - Signature Line 4GB (1 x 4GB) DDR4-2400 Memory](https://pcpartpicker.com/product/GXbkcf/patriot-memory-psd44g240081) | $32.99 @ Amazon 
-    **Storage** | [Seagate - Barracuda 250GB 3.5" 7200RPM Internal Hard Drive](https://pcpartpicker.com/product/vKtCmG/seagate-internal-hard-drive-st3250312as) | $16.34 @ Other World Computing 
-    **Case** | [Rosewill - SRM-01 MicroATX Mini Tower Case](https://pcpartpicker.com/product/wMZ2FT/rosewill-case-srm01) | $29.99 @ Amazon 
-    **Power Supply** | [EVGA - 400W ATX Power Supply](https://pcpartpicker.com/product/86M323/evga-power-supply-100n10400l1) | $29.99 @ Amazon 
-    **Wired Network Adapter** | [TP-Link - TG-3468 PCI-Express x1 10/100/1000 Mbps Network Adapter](https://pcpartpicker.com/product/dQmLrH/tp-link-wired-network-card-tg3468) | $12.14 @ OutletPC 
+    **CPU** | [Intel - Celeron G3930 2.9GHz Dual-Core Processor](https://pcpartpicker.com/product/WqVBD3/intel-celeron-g3930-29ghz-dual-core-processor-bx80677g3930) | $38.69 @ OutletPC
+    **Motherboard** | [Gigabyte - GA-H110M-A Micro ATX LGA1151 Motherboard](https://pcpartpicker.com/product/hMvZxr/gigabyte-motherboard-gah110ma) | $51.49 @ SuperBiiz
+    **Memory** | [Patriot - Signature Line 4GB (1 x 4GB) DDR4-2400 Memory](https://pcpartpicker.com/product/GXbkcf/patriot-memory-psd44g240081) | $32.99 @ Amazon
+    **Storage** | [Seagate - Barracuda 250GB 3.5" 7200RPM Internal Hard Drive](https://pcpartpicker.com/product/vKtCmG/seagate-internal-hard-drive-st3250312as) | $16.34 @ Other World Computing
+    **Case** | [Rosewill - SRM-01 MicroATX Mini Tower Case](https://pcpartpicker.com/product/wMZ2FT/rosewill-case-srm01) | $29.99 @ Amazon
+    **Power Supply** | [EVGA - 400W ATX Power Supply](https://pcpartpicker.com/product/86M323/evga-power-supply-100n10400l1) | $29.99 @ Amazon
+    **Wired Network Adapter** | [TP-Link - TG-3468 PCI-Express x1 10/100/1000 Mbps Network Adapter](https://pcpartpicker.com/product/dQmLrH/tp-link-wired-network-card-tg3468) | $12.14 @ OutletPC
     | *Prices include shipping, taxes, rebates, and discounts* |
     | **Total** | **$211.63**
 
