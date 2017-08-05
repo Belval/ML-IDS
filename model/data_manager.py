@@ -59,8 +59,6 @@ class DataManager(object):
         self.__data = []
         with gzip.open(os.path.join(self.path, 'kdd_data.gz'), 'r') as f:
             for i, l in enumerate(f.readlines()):
-                if i > 200:
-                    break
                 example = l.split(b',')
                 example_vec = np.zeros(self.__FEATURE_VEC_LEN)
                 ground_truth = np.zeros(5)

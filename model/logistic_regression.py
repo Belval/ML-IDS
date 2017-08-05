@@ -12,8 +12,8 @@ class LogisticRegression(BaseModel):
             Fit the logistic regression to the data
         """
 
-        with tf.Session(graph=self._graph) as sess:
-            x = tf.placeholder(tf.float32, [None, self._data_manager.get_feature_vec_len()])
+        with self._graph.as_default():
+            x = tf.placeholder(tf.float32, [None, self._data_manager.get_feature_vec_len()], name='x')
             y = tf.placeholder(tf.float32, [None, self._data_manager.get_ground_truth_len()])
 
             W = tf.Variable(
@@ -36,7 +36,7 @@ class LogisticRegression(BaseModel):
 
             cost = tf.reduce_mean(
                 -tf.reduce_sum(
-                    y*tf.log(pred),
+                    y*tf.log(pred + 0.0000000000001),
                     reduction_indices=1
                 )
             )
@@ -45,6 +45,7 @@ class LogisticRegression(BaseModel):
 
             init = tf.global_variables_initializer()
 
+            sess = tf.Session(graph=self._graph)
             sess.run(init)
 
             for e in range(self._epoch):
@@ -55,13 +56,7 @@ class LogisticRegression(BaseModel):
                     self._data_manager.get_batch_size()
                 )
 
-                print(self._data_manager.get_train_data_count())
-                print(self._data_manager.get_batch_size())
-                print(self._data_manager.get_feature_vec_len())
-                print(self._data_manager.get_ground_truth_len())
-
                 for i in range(total_batch):
-                    print(i)
                     batch_data, batch_ground_truth = zip(*self._data_manager.get_next_train_batch())
                     _, c = sess.run(
                         [optimizer, cost],
@@ -70,3 +65,5 @@ class LogisticRegression(BaseModel):
                     avg_cost += c / total_batch
 
                 print("[+] Epoch: {}, cost: {}".format(e, format(avg_cost)))
+
+            self._session = sess

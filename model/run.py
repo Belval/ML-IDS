@@ -119,6 +119,7 @@ def main():
         raise Exception("Unknown model")
 
     try:
+        raise Exception()
         model.load(
             os.path.join(
                 args.output_dir,
@@ -130,7 +131,12 @@ def main():
 
     model.test()
 
-    model.save(args.output_dir)
+    model.save(
+        os.path.join(
+            args.output_dir,
+            'graph.pb'
+        )
+    )
 
 if __name__ == '__main__':
     main()
